@@ -4,7 +4,7 @@ import React, {Fragment, useEffect, useState} from 'react'
 import Link from 'next/link'
 
 import {usePathname} from "next/navigation";
-import {useThemeContext} from "@/pages/theme-provider";
+import {useThemeContext} from "@/theme-provider";
 import Icon from "@m3/assets/icons/Icon";
 
 export default function Example({title,breadCrumbs,handleChangeMode,handleChangeColor}) {
