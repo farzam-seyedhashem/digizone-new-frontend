@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "@fonts/*": ["./fonts/*"],
+      "@helper/*": ["./helper/*"],
+      "@m3/*": ["./components/m3_design/*"],
+      "@admin/*": ["./components/admin/*"],
+      "@website/*": ["./components/website/*"]
+    }
+  }
+}
