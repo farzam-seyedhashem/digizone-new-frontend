@@ -33,23 +33,23 @@ export default function ProductCardHorizontal(props) {
 
                 {/*</div>*/}
                 <div className={"bg-secondary-container-light dark:bg-secondary-container-dark rounded-t-[24px] py-2 px-2 "}>
-                    <div className={"grid grid-cols-2 h-[360px] overflow-hidden  rounded-[16px] grid-rows-2 gap-1"}>
-                        <div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>
-                            <Image quality={100} layout={'fill'} width={1080} height={720}
+                    {/*<div className={" flex items-center justify-center h-fit  rounded-[16px] "}>*/}
+                        {/*<div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>*/}
+                            <Image quality={100} layout={'responsive'} width={1080} height={820}
                                    className=" w-full object-cover"
                                    src={ImageBaseURL + product?.thumbnail.url} alt=""/>
-                        </div>
-                        {product.images[0] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>
-                            <Image quality={100} layout={'fill'}
-                                   className="  w-full object-cover"
-                                   src={ImageBaseURL + product?.images[0]?.url} alt=""/>
-                        </div>}
-                        {product.images[1] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>
-                            <Image quality={100} layout={'fill'}
-                                   className=" w-full object-cover"
-                                   src={ImageBaseURL + product?.images[1]?.url} alt=""/>
-                        </div>}
-                    </div>
+                        {/*</div>*/}
+                        {/*{product.images[0] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
+                        {/*    <Image quality={100} layout={'fill'}*/}
+                        {/*           className="  w-full object-cover"*/}
+                        {/*           src={ImageBaseURL + product?.images[0]?.url} alt=""/>*/}
+                        {/*</div>}*/}
+                        {/*{product.images[1] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
+                        {/*    <Image quality={100} layout={'fill'}*/}
+                        {/*           className=" w-full object-cover"*/}
+                        {/*           src={ImageBaseURL + product?.images[1]?.url} alt=""/>*/}
+                        {/*</div>}*/}
+                    {/*</div>*/}
                 </div>
                 <div className={"px-6"}>
                     <div className={"w-full relative pt-5"}>
