@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     minimumCacheTTL: 31536000,
-    domains: ["localhost","api.dr-abedin.com"],
+    domains: ["localhost","api.digizoneshop.com"],
     formats: ['image/webp'],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
