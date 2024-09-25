@@ -17,7 +17,7 @@ export default function Example({title,breadCrumbs,handleChangeMode,handleChange
     let {isDark, colorSystem} = theme;
     return (
         <div className={"md:block hidden"}>
-            <div className={"h-[64px] border-b border-outline-light dark:border-outline-dark flex items-center px-4 md:px-6 z-999 fixed bg-surface-light dark:bg-surface-dark w-full top-0 left-0 py-2"}>
+            <div className={"h-[64px] border-b border-outline-light dark:border-outline-dark flex items-center px-4 md:px-6 z-[1001] fixed bg-surface-light dark:bg-surface-dark w-full top-0 left-0 py-2"}>
                 <div className={"h-12 w-12 ml-6"}>
                     <svg className={"text-on-surface-light dark:text-on-surface-dark"} width="100%" height="100%" viewBox="0 0 1089 683" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <g id="Group-copy">

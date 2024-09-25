@@ -1,4 +1,3 @@
-
 import React, {useEffect} from "react";
 import Image from 'next/legacy/image'
 import Link from 'next/link'
@@ -32,23 +31,29 @@ export default function ProductCardHorizontal(props) {
                 {/*</div>)}*/}
 
                 {/*</div>*/}
-                <div className={"bg-secondary-container-light dark:bg-secondary-container-dark rounded-t-[24px] py-2 px-2 "}>
+                <div
+                    className={"h-[200px] overflow-hidden bg-secondary-container-light dark:bg-secondary-container-dark rounded-t-[24px] py-2 px-2 "}>
                     {/*<div className={" flex items-center justify-center h-fit  rounded-[16px] "}>*/}
-                        {/*<div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>*/}
-                            <Image quality={100} layout={'responsive'} width={1080} height={820}
-                                   className=" w-full object-cover"
-                                   src={ImageBaseURL + product?.thumbnail.url} alt=""/>
-                        {/*</div>*/}
-                        {/*{product.images[0] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
-                        {/*    <Image quality={100} layout={'fill'}*/}
-                        {/*           className="  w-full object-cover"*/}
-                        {/*           src={ImageBaseURL + product?.images[0]?.url} alt=""/>*/}
-                        {/*</div>}*/}
-                        {/*{product.images[1] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
-                        {/*    <Image quality={100} layout={'fill'}*/}
-                        {/*           className=" w-full object-cover"*/}
-                        {/*           src={ImageBaseURL + product?.images[1]?.url} alt=""/>*/}
-                        {/*</div>}*/}
+                    {/*<div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>*/}
+                    {product?.thumbnail ? <Image quality={100} layout={'responsive'} width={1080} height={820}
+                                                 className=" w-full object-cover"
+                                                 src={ImageBaseURL + product?.thumbnail.url} alt=""/> :
+                        <div className={" w-full relative flex overflow-hidden items-center justify-center h-[200px]"}>
+                            <Icon size={48} fill={1} className={"absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[48px] text-on-secondary-container-light dark:text-on-secondary-container-dark "}>
+                                image
+                            </Icon>
+                        </div>}
+                    {/*</div>*/}
+                    {/*{product.images[0] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
+                    {/*    <Image quality={100} layout={'fill'}*/}
+                    {/*           className="  w-full object-cover"*/}
+                    {/*           src={ImageBaseURL + product?.images[0]?.url} alt=""/>*/}
+                    {/*</div>}*/}
+                    {/*{product.images[1] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>*/}
+                    {/*    <Image quality={100} layout={'fill'}*/}
+                    {/*           className=" w-full object-cover"*/}
+                    {/*           src={ImageBaseURL + product?.images[1]?.url} alt=""/>*/}
+                    {/*</div>}*/}
                     {/*</div>*/}
                 </div>
                 <div className={"px-6"}>

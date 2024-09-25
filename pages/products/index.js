@@ -8,6 +8,7 @@ import FAB from "@m3/floating_action_buttons/FAB";
 import {API} from "@/config";
 import Layout from "@/Layout/layout";
 import {useSearchParams} from "next/navigation";
+import {useState} from "react";
 
 // const getLastProduct = cache(async (searchParams) => {
 //     // const c = new URLSearchParams(searchParams)
@@ -26,10 +27,10 @@ import {useSearchParams} from "next/navigation";
 export async function getServerSideProps(context) {
     const getProducts = await fetch(`${API}/products`)
     const getProductCategories = await fetch(`${API}/product-category`)
-    const getCategory = await fetch(`${API}/product-specs`)
+    const getSpecs = await fetch(`${API}/product-specs`)
     const products = await getProducts.json()
     const productCategories = await getProductCategories.json()
-    const productSpecs = await getCategory.json()
+    const productSpecs = await getSpecs.json()
     return {
         props: {
             products,
@@ -47,30 +48,35 @@ export default function ProductPage({
     // const lp = await getLastProduct(searchParams)
     // const [products] = await Promise.all([lp])
     const searchParams = useSearchParams()
+    const [isOpenFilterDialog, setIsOpenFilterDialog] = useState(false);
+
     //
     // const categories = await getCategories()
     // const specs = await getSpecs()
     return (
         <Layout>
 
-            <FAB className={"fixed bottom-[calc(64px_+_24px)] right-6 z-999 md:hidden "} isExtended={true}
-                 label={"فیلتر"}>
-                filter
-            </FAB>
+            {/*<FAB className={"fixed bottom-[calc(64px_+_24px)] right-6 z-999 md:hidden "} isExtended={true}*/}
+            {/*     label={"فیلتر"}>*/}
+            {/*    filter*/}
+            {/*</FAB>*/}
             <div className={" bg-surface-light dark:bg-surface-dark"}>
                 <div
-                    className={"relative py-3 px-6 border-b border-outline-variant-light dark:border-outline-variant-dark"}>
-                    <div>
+                    className={"flex items-center relative py-3 px-6 md:border-b md:border-outline-variant-light dark:border-outline-variant-dark"}>
+                    <div className={"w-full items-center justify-center flex"}>
                         <Link href={"/products/"}
-                              className={`h-[48px] text-title-small font-bold text-on-surface-light dark:text-on-surface-dark px-6 items-center ml-2 rounded-[8px] inline-flex   bg-surface-container-high-light dark:bg-surface-container-high-dark`}>
-                            همه محصولات
+                              className={`h-[48px] text-title-small font-bold px-6 items-center ml-2 inline-flex   rounded-full bg-secondary-container-light dark:bg-secondary-container-high-light dark:bg-secondary-container-high-dark text-on-secondary-container-light dark:text-on-secondary-container-dark`}>
+                            همه دسته بندی ها
                         </Link>
-                        {productCategories.data.map(category => <Link href={"/products/" + category.slug}
+                        {productCategories.data.filter(cat=>!cat.topCategory).map(category => <Link href={"/products/" + category.slug}
                                                                       key={category._id}
                                                                       className={`text-title-small font-medium h-[48px] text-on-surface-light dark:text-on-surface-dark px-6 items-center ml-2 rounded-[8px] inline-flex`}>
                             {category.title}
                         </Link>)}
                     </div>
+                    {/*<Button className={"md:block hidden"} onClick={() => setIsOpenFilterDialog(true)} variant={"tonal"} icon="filter_alt">*/}
+                    {/*    فیلتر*/}
+                    {/*</Button>*/}
                     {/*<div className={"absolute left-6 top-1/2 transform -translate-y-1/2"}>*/}
                     {/*    <Button variant={"outlined"} icon={"filter_alt"}>*/}
                     {/*        فیلتر محصولات*/}
@@ -121,6 +127,7 @@ export default function ProductPage({
                     {/*</div>*/}
 
                     <div className={"grid grid-cols-12 gap-4"}>
+
                         <div className={"md:col-span-9 col-span-12 grid grid-cols-12 gap-4"}>
                             {products.data.map(product =>
                                 <div key={product._id} className={"col-span-12 md:col-span-3"}>
@@ -129,20 +136,7 @@ export default function ProductPage({
                             )}
                         </div>
                         <div className={"col-span-3"}>
-                            <div
-                                className={"bg-surface-container-high-light dark:bg-surface-container-high-dark w-full p-6 rounded-[24px]"}>
-                                {productSpecs.data.map(spec => <div className={"mb-2 px-2"} key={spec._id}>
-                                    <h3 className={"px-4 mb-2 text-title-small text-on-surface-light dark:text-on-surface-dark  font-bold"}>
-                                        {spec.title}
-                                    </h3>
-                                    {spec.values.map(value =>
-                                        <Checkbox
-                                            isCheck={Array.isArray(searchParams[spec._id]) ? searchParams[spec._id].findIndex(item => item === value._id) !== -1 : searchParams[spec._id] === value._id}
-                                            value={value._id} name={spec._id} color={"primary"} label={value.title}
-                                            key={value._id}/>
-                                    )}
-                                </div>)}
-                            </div>
+
 
                             {/*    <div*/}
                             {/*        className={"relative py-6 h-[calc(100vh_-_240px)] bg-surface-container-high-light dark:bg-surface-container-high-dark rounded-[24px]"}>*/}
