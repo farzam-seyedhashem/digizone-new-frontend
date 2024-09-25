@@ -15,10 +15,10 @@ export default function ProductCardHorizontal(props) {
     }, []);
     // const product = item?.attributes
     return (
-        <Link href={`/product/${product.slug}`}>
+        <Link className={"flex h-full w-full"} href={`/product/${product.slug}`}>
 
             <div
-                className={"bg-surface-container-light dark:bg-surface-container-dark rounded-[24px]  pb-6  "}>
+                className={"w-full bg-surface-container-light dark:bg-surface-container-dark rounded-[24px]  pb-6  "}>
                 {/*<div className={"px-6 pt-6 pb-4"}>*/}
                 {/*{product.spec.map((item, i) => i < 3 && <div key={i}*/}
                 {/*                                             className={`border border-outline-light dark:border-outline-dark rounded-full justify-center inline-flex w-[48px] h-[48px]  ml-2 items-center`}>*/}

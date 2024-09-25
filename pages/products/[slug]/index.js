@@ -82,7 +82,7 @@ export default function ProductPage({
                 <div
                     className={"md:hidden border-b border-outline-light dark:border-outline-dark bg-surface-light dark:bg-surface-dark"}>
                     <div
-                        className={"flex items-center border-b border-outline-variant-light dark:border-outline-variant-dark"}>
+                        className={"flex text-on-surface-light font-medium dark:text-on-surface-dark  items-center border-b border-outline-variant-light dark:border-outline-variant-dark"}>
                         <Link href={"/products/"}
                               className={`md:text-title-small text-label-large font-medium h-[48px] text-on-surface-light dark:text-on-surface-dark items-center ml-2 rounded-[8px] inline-flex`}>
                             <IconButton>
@@ -113,14 +113,14 @@ export default function ProductPage({
                                            objectFit={"cover"} alt={""}
                                            src={ImageBaseURL + subCategory.thumbnail.url}/>
                                     <div
-                                        className={"z-999 w-full h-fit relative md:py-10 py-6 px-4 md:px-10"}>
+                                        className={"z-999 w-full h-fit relative md:py-10 py-6  md:px-10"}>
 
-                                        <h2 className={"text-right md:text-center text-on-surface-light dark:text-on-surface-dark text-headline-medium font-black"}>
+                                        <h2 className={"md:px-0 px-6 text-right md:text-center text-on-surface-light dark:text-on-surface-dark text-headline-medium font-black"}>
                                             {subCategory.title}
                                         </h2>
-                                        <div className={"md:grid md:grid-cols-12 mt-6 mb-4 gap-6"}>
+                                        <div className={"md:grid md:grid-cols-12 px-4 w-full  md:whitespace-normal whitespace-nowrap md:overflow-auto overflow-scroll mt-6 mb-4  md:gap-6"}>
                                             {subCategory.products.map(product =>
-                                                <div key={product._id} className={"w-[280px] md:w-full md:col-span-2"}>
+                                                <div key={product._id} className={"w-[260px] md:ml-0 ml-4 inline-flex  md:w-full md:col-span-2"}>
                                                     <ProductCardHorizontal product={product}/>
                                                 </div>
                                             )}
