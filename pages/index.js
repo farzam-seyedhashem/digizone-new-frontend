@@ -5,6 +5,7 @@ import {API} from "@/config";
 import PostCardHorizontal from "@website/PostCardHorizontal";
 import Layout from "@/Layout/layout";
 import ProductCardHorizontal from "@website/ProductCardHorizontal";
+import Slider from "@website/Slider";
 // import Layout from "@/Layout/layout";
 export async function getServerSideProps(context)  {
   const getPost = await fetch(`${API}/blog?per_page=4&page=1`)
@@ -23,13 +24,13 @@ export async function getServerSideProps(context)  {
 }
 
 export default function Home({products,posts,productCategories}) {
-
+const slides = []
   return (
       <Layout>
       <div className=" bg-surface-light dark:bg-surface-dark">
 
         <div className={"px-4  min-h-screen pt-6  mx-auto"}>
-          {/*<Slider slidesData={slides}/>*/}
+          <Slider slidesData={slides}/>
           <div className={"mt-12 flex items-center"}>
             {/*{categories.data.map((category) => (*/}
 
