@@ -65,7 +65,7 @@ export default function ProductPage({
                     className={"flex items-center relative py-3 px-6 md:border-b md:border-outline-variant-light dark:border-outline-variant-dark"}>
                     <div className={"w-full items-center justify-center flex"}>
                         <Link href={"/products/"}
-                              className={`h-[48px] text-title-small font-bold px-6 items-center ml-2 inline-flex   rounded-full bg-secondary-container-light dark:bg-secondary-container-high-light dark:bg-secondary-container-high-dark text-on-secondary-container-light dark:text-on-secondary-container-dark`}>
+                              className={`h-[48px] text-title-small font-bold px-6 items-center ml-2 inline-flex   rounded-full bg-secondary-container-light dark:bg-secondary-container-dark dark:bg-secondary-container-high-dark text-on-secondary-container-light dark:text-on-secondary-container-dark`}>
                             همه دسته بندی ها
                         </Link>
                         {productCategories.data.filter(cat=>!cat.topCategory).map(category => <Link href={"/products/" + category.slug}

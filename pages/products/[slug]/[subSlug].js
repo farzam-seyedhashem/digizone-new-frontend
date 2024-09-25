@@ -10,6 +10,7 @@ import Layout from "@/Layout/layout";
 import {useSearchParams} from "next/navigation";
 import Icon from "@m3/assets/icons/Icon";
 import {useState} from "react";
+import FilterDialog from "@website/FilterDialog";
 
 // const getLastProduct = cache(async (searchParams) => {
 //     // const c = new URLSearchParams(searchParams)
@@ -74,6 +75,21 @@ export default function ProductPage({
     // const specs = await getSpecs()
     return (
         <Layout>
+            <FilterDialog open={isOpenFilterDialog} setOpen={setIsOpenFilterDialog}>
+
+                {productSpecs.data.map(spec => <div className={"mb-2 px-2"} key={spec._id}>
+                    <h3 className={"px-4 mb-2 text-title-small text-on-surface-light dark:text-on-surface-dark  font-bold"}>
+                        {spec.title}
+                    </h3>
+                    {spec.values.map((value, index) =>
+                        spec.values.length - 1 > index && <Checkbox
+                            isCheck={Array.isArray(searchParams[spec._id]) ? searchParams[spec._id].findIndex(item => item === value._id) !== -1 : searchParams[spec._id] === value._id}
+                            value={value._id} name={spec._id} color={"primary"} label={value.title}
+                            key={value._id}/>
+                    )}
+                </div>)}
+
+            </FilterDialog>
             <div className={" bg-surface-light dark:bg-surface-dark"}>
                 <FAB className={"fixed bottom-[calc(64px_+_24px)] right-6 z-999 md:hidden "} isExtended={true}
                      label={"فیلتر"}>
@@ -89,14 +105,15 @@ export default function ProductPage({
                         {productCategories.data.filter(cat => !cat.topCategory).map(category => <Link
                             href={"/products/" + category.slug}
                             key={category._id}
-                            className={productCategory._id === category._id ? 'h-[48px] text-title-small font-bold px-6 items-center ml-2 inline-flex   rounded-full bg-secondary-container-light dark:bg-secondary-container-high-light dark:bg-secondary-container-high-dark text-on-secondary-container-light dark:text-on-secondary-container-dark' : `text-title-small font-medium h-[48px] text-on-surface-light dark:text-on-surface-dark px-6 items-center ml-2 rounded-[8px] inline-flex`}>
+                            className={productCategory._id === category._id ? 'h-[48px] text-title-small font-bold px-6 items-center ml-2 inline-flex   rounded-full bg-secondary-container-light dark:bg-secondary-container-dark dark:bg-secondary-container-high-dark text-on-secondary-container-light dark:text-on-secondary-container-dark' : `text-title-small font-medium h-[48px] text-on-surface-light dark:text-on-surface-dark px-6 items-center ml-2 rounded-[8px] inline-flex`}>
                             {category.title}
                         </Link>)}
                     </div>
                 </div>
                 <div
                     className={"md:hidden bg-surface-light dark:bg-surface-dark border-b border-outline-light dark:border-outline-dark"}>
-                    <div className={"flex items-center w-full h-[56px] border-b border-outline-variant-light dark:border-outline-variant-dark"}>
+                    <div
+                        className={"flex items-center w-full h-[56px] border-b border-outline-variant-light dark:border-outline-variant-dark"}>
                         <Link className={"ml-2"} href={"/products"}>
                             <IconButton icon={"chevron_right"}>
                                 chevron_right
@@ -147,40 +164,25 @@ export default function ProductPage({
                     {/*    </Button>*/}
                     {/*</div>*/}
                 </div>
-                {isOpenFilterDialog && <div className={"fixed bg-scrim-dark/[40%] z-[999] inset-0 "}></div>}
-                {isOpenFilterDialog && <div
-                    className={"w-[560px] z-999 rounded-[28px] overflow-hidden bg-surface-container-high-light dark:bg-surface-container-high-dark fixed top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 "}>
-                    <div className={'py-6'}>
-                        <h3 className={"font-bold text-on-surface-light dark:text-on-surface-dark text-title-large text-center"}>فیلتر
-                            کردن محصول
-                        </h3>
-                    </div>
-                    <div className={"h-[400px] overflow-y-scroll"}>
-                        <div
-                            className={"bg-surface-container-high-light dark:bg-surface-container-high-dark w-full py-4 rounded-[24px]"}>
-                            {productSpecs.data.map(spec => <div className={"mb-2 px-2"} key={spec._id}>
-                                <h3 className={"px-4 mb-2 text-title-small text-on-surface-light dark:text-on-surface-dark  font-bold"}>
-                                    {spec.title}
-                                </h3>
-                                {spec.values.map((value, index) =>
-                                    spec.values.length - 1 > index && <Checkbox
-                                        isCheck={Array.isArray(searchParams[spec._id]) ? searchParams[spec._id].findIndex(item => item === value._id) !== -1 : searchParams[spec._id] === value._id}
-                                        value={value._id} name={spec._id} color={"primary"} label={value.title}
-                                        key={value._id}/>
-                                )}
-                            </div>)}
-                        </div>
-                    </div>
-                    <div className={"py-6 px-6 flex justify-end"}>
-                        <Button onClick={() => setIsOpenFilterDialog(false)}>
-                            انصراف
-                        </Button>
-                        <Button variant={"filled"}>
-                            فیلتر
-                        </Button>
-                    </div>
+                {/*{isOpenFilterDialog && <div className={"fixed bg-scrim-dark/[40%] z-[999] inset-0 "}></div>}*/}
+                {/*{isOpenFilterDialog && <div*/}
+                {/*    className={"w-[560px] z-999 rounded-[28px] overflow-hidden bg-surface-container-high-light dark:bg-surface-container-high-dark fixed top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 "}>*/}
+                {/*    <div className={'py-6'}>*/}
+                {/*        <h3 className={"font-bold text-on-surface-light dark:text-on-surface-dark text-title-large text-center"}>فیلتر*/}
+                {/*            کردن محصول*/}
+                {/*        </h3>*/}
+                {/*    </div>*/}
+                {/*   */}
+                {/*    <div className={"py-6 px-6 flex justify-end"}>*/}
+                {/*        <Button onClick={() => setIsOpenFilterDialog(false)}>*/}
+                {/*            انصراف*/}
+                {/*        </Button>*/}
+                {/*        <Button variant={"filled"}>*/}
+                {/*            فیلتر*/}
+                {/*        </Button>*/}
+                {/*    </div>*/}
 
-                </div>}
+                {/*</div>}*/}
 
 
                 {/*<form action="/products" method="GET"*/}
