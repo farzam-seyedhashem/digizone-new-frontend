@@ -11,6 +11,7 @@ import {useSearchParams} from "next/navigation";
 import Icon from "@m3/assets/icons/Icon";
 import {useState} from "react";
 import FilterDialog from "@website/FilterDialog";
+import {useRouter} from "next/router";
 
 // const getLastProduct = cache(async (searchParams) => {
 //     // const c = new URLSearchParams(searchParams)
@@ -45,11 +46,39 @@ export async function getServerSideProps(context) {
     console.log(productCategory)
     const getSpecs = await fetch(`${API}/product-specs?cat=${productSubCategory._id}`)
     const productSpecs = await getSpecs.json()
-    const getProducts = await fetch(`${API}/products?category=${productSubCategory._id}`)
+
+    let filter = ""
+    let query = context.query
+
+    delete (query.slug);
+    delete (query.subSlug);
+    Object.keys(query).map((key,i) => {
+        if (Array.isArray(query[key])) {
+            query[key].map((value,index) =>
+                filter += `${key}=${value}&`
+            )
+        } else {
+            console.log(key)
+            filter += `${key}=${query[key]}&`
+        }
+
+    })
+
+    console.log(filter)
+    // if (context.query.filter){
+    //     if (Array.isArray(context.query.filter)){
+    //         filter=context.query.filter.join("&")
+    //     }else{
+    //         filter=context.query.filter
+    //     }
+    // }
+    // console.log(filter)
+    const getProducts = await fetch(`${API}/products?category=${productSubCategory._id}&${filter}`)
     const products = await getProducts.json()
 
     return {
         props: {
+            // queries: JSON.stringify(context.query),
             productSubCategory,
             products,
             productCategories,
@@ -60,6 +89,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProductPage({
+                                        queries,
                                         productSubCategory,
                                         products,
                                         productCategories,
@@ -70,7 +100,14 @@ export default function ProductPage({
     // const [products] = await Promise.all([lp])
     //
     const [isOpenFilterDialog, setIsOpenFilterDialog] = useState(false);
-    const searchParams = useSearchParams()
+    const router = useRouter();
+    const {query} = router;
+    console.log(query)
+    // const {} = query
+    //
+    // console.log(filterJ);
+    // const searchParams = useSearchParams()
+    // console.log(searchParams)
     // const categories = await getCategories()
     // const specs = await getSpecs()
     return (
@@ -81,17 +118,24 @@ export default function ProductPage({
                     <h3 className={"px-4 mb-2 text-title-small text-on-surface-light dark:text-on-surface-dark  font-bold"}>
                         {spec.title}
                     </h3>
+
                     {spec.values.map((value, index) =>
                         spec.values.length - 1 > index && <Checkbox
-                            isCheck={Array.isArray(searchParams[spec._id]) ? searchParams[spec._id].findIndex(item => item === value._id) !== -1 : searchParams[spec._id] === value._id}
-                            value={value._id} name={spec._id} color={"primary"} label={value.title}
+                            isCheck={()=> {
+                                if (Array.isArray(query[`spec[${spec._id}]`])) {
+                                    return query[`spec[${spec._id}]`].includes(`${value._id}`)
+                                }else{
+                                    return query[`spec[${spec._id}]`] === `${value._id}`
+                                }
+                            }}
+                            value={`${value._id}`} name={`spec[${spec._id}]`} color={"primary"} label={value.title}
                             key={value._id}/>
                     )}
                 </div>)}
 
             </FilterDialog>
             <div className={" bg-surface-light dark:bg-surface-dark"}>
-                <FAB className={"fixed bottom-[calc(64px_+_24px)] right-6 z-999 md:hidden "} isExtended={true}
+                <FAB onClick={()=>setIsOpenFilterDialog(true)} className={"fixed bottom-[calc(64px_+_24px)] right-6 z-999 md:hidden "} isExtended={true}
                      label={"فیلتر"}>
                     filter
                 </FAB>
@@ -113,7 +157,7 @@ export default function ProductPage({
                 <div
                     className={"md:hidden bg-surface-light dark:bg-surface-dark border-b border-outline-light dark:border-outline-dark"}>
                     <div
-                        className={"flex items-center w-full h-[56px] border-b border-outline-variant-light dark:border-outline-variant-dark"}>
+                        className={"text-on-surface-light dark:text-on-surface-dark flex items-center w-full h-[56px] border-b border-outline-variant-light dark:border-outline-variant-dark"}>
                         <Link className={"ml-2"} href={"/products"}>
                             <IconButton icon={"chevron_right"}>
                                 chevron_right
@@ -129,10 +173,10 @@ export default function ProductPage({
                                 {category.title}
                             </Link>)}
                     </div>
-                    <Button className={"md:block hidden"} onClick={() => setIsOpenFilterDialog(true)} variant={"tonal"}
-                            icon="filter_alt">
-                        فیلتر
-                    </Button>
+                    {/*<Button className={"md:block hidden"} onClick={() => setIsOpenFilterDialog(true)} variant={"tonal"}*/}
+                    {/*        icon="filter_alt">*/}
+                    {/*    فیلتر*/}
+                    {/*</Button>*/}
                     {/*<div className={"absolute left-6 top-1/2 transform -translate-y-1/2"}>*/}
                     {/*    <Button variant={"outlined"} icon={"filter_alt"}>*/}
                     {/*        فیلتر محصولات*/}
