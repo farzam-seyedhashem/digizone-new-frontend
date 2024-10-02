@@ -27,7 +27,7 @@ export default function ProductPage({product}) {
                 <div className={"container mx-auto"}>
                     <div className={"grid grid-cols-12 gap-6"}>
                         <div className={"md:col-span-8 col-span-12"}>
-                            {product?.thumbanil ? <ProductSlider product={product}/> : <div
+                            {product?.thumbnail ? <ProductSlider product={product}/> : <div
                                 className={"relative h-[300px] md:h-[600px] bg-surface-container-high-light dark:bg-surface-container-high-dark rounded-[24px]"}>
                                 <Icon fill={1} className={"text-on-surface-variant-light dark:text-on-surface-variant-dark text-[56px] absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 left-1/2"}>
                                     image
