@@ -58,21 +58,21 @@ export default function Example({title,breadCrumbs,handleChangeMode,handleChange
                         </Link>
                     </li>
                 </ul>
-                <button onClick={() => setTheme(!isDark, "default-theme-color")}
-                        className={`ml-2 hover:bg-opacity-[8%] rounded-full dark:hover:bg-opacity-[8%] dark:hover:bg-on-surface-variant-dark hover:bg-on-surface-variant-light transform flex items-center justify-center   w-[40px] h-[40px] group  `}>
+                {/*<button onClick={() => setTheme(!isDark, "default-theme-color")}*/}
+                {/*        className={`ml-2 hover:bg-opacity-[8%] rounded-full dark:hover:bg-opacity-[8%] dark:hover:bg-on-surface-variant-dark hover:bg-on-surface-variant-light transform flex items-center justify-center   w-[40px] h-[40px] group  `}>*/}
 
-                    {!isDark?<Icon
-                        className={`text-on-surface-variant-light material-symbols-outlined group-hover:font-vs-[1_400_0_24] font-vs-[0_400_0_24] dark:text-on-surface-variant-dark`}
-                        type={"outline"}>
-                        light_mode
-                    </Icon>:<Icon
-                        className={`text-on-surface-variant-light material-symbols-outlined group-hover:font-vs-[1_400_0_24] font-vs-[0_400_0_24] dark:text-on-surface-variant-dark`}
-                        type={"outline"}>
-                        dark_mode
-                    </Icon>}
+                {/*    {!isDark?<Icon*/}
+                {/*        className={`text-on-surface-variant-light material-symbols-outlined group-hover:font-vs-[1_400_0_24] font-vs-[0_400_0_24] dark:text-on-surface-variant-dark`}*/}
+                {/*        type={"outline"}>*/}
+                {/*        light_mode*/}
+                {/*    </Icon>:<Icon*/}
+                {/*        className={`text-on-surface-variant-light material-symbols-outlined group-hover:font-vs-[1_400_0_24] font-vs-[0_400_0_24] dark:text-on-surface-variant-dark`}*/}
+                {/*        type={"outline"}>*/}
+                {/*        dark_mode*/}
+                {/*    </Icon>}*/}
 
 
-                </button>
+                {/*</button>*/}
             </div>
         </div>
     )
