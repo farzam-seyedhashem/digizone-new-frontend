@@ -32,14 +32,14 @@ export default function ProductCardHorizontal(props) {
 
                 {/*</div>*/}
                 <div
-                    className={"h-[200px] overflow-hidden bg-secondary-container-light dark:bg-secondary-container-dark rounded-t-[24px] py-2 px-2 "}>
+                    className={"h-fit overflow-hidden bg-secondary-container-light dark:bg-secondary-container-dark rounded-t-[24px] p-0 "}>
                     {/*<div className={" flex items-center justify-center h-fit  rounded-[16px] "}>*/}
                     {/*<div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>*/}
-                    {product?.thumbnail ? <Image quality={100} layout={'responsive'} width={1080} height={820}
+                    {product?.thumbnail ? <Image quality={100} layout={'responsive'} width={1920} height={1440}
                                                  className=" w-full object-cover"
                                                  src={ImageBaseURL + product?.thumbnail.url} alt=""/> :
-                        <div className={" w-full relative flex overflow-hidden items-center justify-center h-[200px]"}>
-                            <Icon size={48} fill={1} className={"absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[48px] text-on-secondary-container-light dark:text-on-secondary-container-dark "}>
+                        <div className={"  flex items-center justify-center w-full  aspect-w-16 aspect-h-12"}>
+                            <Icon size={48} fill={1} className={"text-center justify-center flex items-center text-[48px] text-on-secondary-container-light dark:text-on-secondary-container-dark "}>
                                 image
                             </Icon>
                         </div>}
